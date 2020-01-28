@@ -1,1 +1,102 @@
+body{
+	background-image: url("water-blue-ocean.jpg");
+}
+td {
+  border: 1px solid #000000;
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  text-align: center;
+}
+.center{
+	margin: auto;
+  	width: 10%;
+  	border: 3px solid green;
+	padding: 5px;
+	text-align: center;
+	background-color: rgb(242, 255, 0);
+}
+.heading{
+	display: inline-block;
+}
 
+.board{
+	border-collapse: collapse;
+	float:left;
+	border: 3px solid black;
+	margin-left: 65px;
+	margin-right:65px;
+}
+
+/*BOARD A*/
+.boardA-none{
+	background-color: transparent;
+}
+
+.boardA-boat{
+	background-color: gray;
+}
+
+.boardA-nextToABoat{
+	background-color: transparent;
+}
+
+.boardA-hit{
+	background-color: rgba(255, 0, 0, 0.5); 
+}
+
+.boardA-deadBoat{
+	background-color: rgb(0, 0, 0, 0.7);
+}
+
+.boardA-miss{
+	background-color: rgb(255, 255, 255,0.7);
+}
+
+
+/*BOARD B*/
+.boardB-none{
+	background-color: transparent;
+}
+
+.boardB-boat{
+	background-color: transparent;
+}
+
+.boardB-nextToABoat{
+	background-color: transparent;
+}
+
+.boardB-hit{
+	background-color: rgba(255, 0, 0, 0.5);
+}
+.boardB-deadBoat{
+	background-color: rgb(0, 0, 0, 0.7);;
+}
+
+.boardB-miss{
+	background-color: rgb(255, 255, 255,0.7);
+}
+
+
+/*BOARDS*/
+.boardA{
+	display: inline-block;
+	vertical-align: top;
+	float: left;
+}
+
+.boardB{
+	float: right;
+	display: inline-block;
+	vertical-align: top;
+}
+
+}
+#coordinates {
+	border: 2px solid black;
+}
+
+.sidenr{
+	background-color: transparent;
+}

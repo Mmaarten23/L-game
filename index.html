@@ -4,10 +4,22 @@
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <script src="code.js"></script>
-        <link rel="stylesheet" type="text/css" href="stylesheet.css"> 
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
     </head>
-
-    <body>
-        Hello, world!
+    <body onmu>    
+        <div class="center">
+            <h3 class="heading">Timer:</h3>
+            <div id="timer" class="heading" >0:0:0</div>
+            <div>
+                <button type="button"  onclick="reset()">reset</button>
+                <button type="button"  id="gun" onclick="machine_gun()">machine gun</button>
+            </div>
+            <div id="coordinates" class="heading"></div>
+        </div>
+        <div id="boards">
+        	<div id="boardA" class="boardA" ></div>
+        	<div id="boardB" class="boardB" ></div>
+        </div>
     </body>
 </html>
+<comment
