@@ -56,18 +56,11 @@ function generate_empty_board(amount_of_rows, amount_of_cols){
   return temp_board
 }
 
-
-
-
-
-
 function drawBoard(board,container){
   boats_dead()
   document.getElementById(container).innerHTML = generate_board_html(board, container);
   
 }
-
-
 
 window.onload = function(){
   
@@ -88,9 +81,4 @@ function format_timer(timer) {
   formatted_timer = `${hours}:${minutes}:${timer}`;
   return `${hours}:${minutes}:${timer}`
 }
-
-
-
-
-
 
