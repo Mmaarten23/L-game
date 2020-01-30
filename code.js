@@ -3,13 +3,8 @@
 function generate_board_html(board,container){
     let board_html = "";
     let temp_row = "";
-    alphabet = ["","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-    for (i = 0; i < board[0].length; i++){
-      temp_row += `<th>${alphabet[i]}</th>`;
-    }
-    board_html += temp_row;
 
-    for (let i = 1; i < board.length; i++){
+    for (let i = 0; i < board.length; i++){
       let row_html = "<tr>";
       for(let j = 0; j < board[i].length; j++){
         if (j == 0){
