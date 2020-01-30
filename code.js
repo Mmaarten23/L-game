@@ -39,22 +39,7 @@ function generate_board_html(board,container){
 }
 
 
-function generate_empty_board(amount_of_rows, amount_of_cols){
-  temp_board = [];
-  temp_row = [];
-  for (let i = 0; i < amount_of_cols + 1; i++) {
-    temp_row.push("heading");
-  }
-  temp_board.push(temp_row)
-  for (var row = 0; row < amount_of_rows; row++) {
-    temp_row = [row + 1];
-      for (var col = 0; col < amount_of_cols; col++) {
-        temp_row.push("0")
-      }
-      temp_board.push(temp_row);
-  }
-  return temp_board
-}
+
 
 function drawBoard(board,container){
   boats_dead()
