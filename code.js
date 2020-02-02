@@ -43,14 +43,10 @@ function main(){
 }
 
 function initialise_board(){
-  /*
-  3 = NEUTRAL
-  1 = PLAYER_1
-  */
   board = [[3,1,1,0],
            [0,2,1,0],
            [0,2,1,0],
-           [0,2,2,3]]
+           [0,2,2,3]];
   return board
 }
 
@@ -58,3 +54,72 @@ function initialise_board(){
 window.onload = function(){
   main()
 }
+
+function check_l_valid(board, startRow, startCol, rotation){
+  positions = decode_rotation(startRow, startCol, rotation)
+  old_count = 0
+  for (tuple in positions){
+    // is it within the board boundries
+    if (tuple[0] < 0 || tuple[0] > 3 || tuple[1] < 0 || tuple[1] > 3){
+      return false
+    }
+    // is it on top of a neutral piece
+    if (board[tuple[0]][tuple[1]] == 3){
+      return false
+    }
+    // is it on a spot accupied by the opponent
+    if (board[tuple[0]][tuple[1]] == 2){
+      return false
+    }
+    if (board[tuple[0]][tuple[1]] == 4){
+      old_count++
+    }
+  }
+  // same position as where it started
+  if (old_count == 4) {
+    return false
+  }
+  return true
+}
+
+function decode_rotation(startRow, startCol, rotation){
+  console.log(rotation)
+  if (rotation == "up-left") {
+    return [[startRow,startCol],[startRow - 1,startCol],[startRow - 2,startCol],[startRow - 2,startCol - 1]]
+  }
+  if (rotation == "up-right") {
+    return [[startRow,startCol],[startRow - 1,startCol],[startRow - 2,startCol],[startRow - 2,startCol + 1]]
+  }
+  if (rotation == "right-up") {
+    return [[startRow,startCol],[startRow,startCol + 1],[startRow,startCol + 2],[startRow - 1,startCol + 2]]
+  }
+  if (rotation == "right-down") {
+    console.log("test");
+    return [[startRow,startCol],[startRow,startCol + 1],[startRow,startCol + 2],[startRow + 1,startCol + 2]]
+  }
+  if (rotation == "down-left") {
+    return [[startRow,startCol],[startRow + 1,startCol],[startRow + 2,startCol],[startRow + 2,startCol - 1]]
+  }
+  if (rotation == "down-right") {
+    return [[startRow,startCol],[startRow + 1,startCol],[startRow + 2,startCol],[startRow + 2,startCol + 1]]
+  }
+  if (rotation == "left-up") {
+    return [[startRow,startCol],[startRow,startCol - 1],[startRow,startCol - 2],[startRow - 1,startCol - 2]]
+  }
+  if (rotation == "left-down") {
+    return [[startRow,startCol],[startRow,startCol - 1],[startRow,startCol - 2],[startRow + 1,startCol - 2]]
+  }
+}
+
+
+
+/*NOTES*/
+// rotations = ["up-left","up-right","right-up","right-down","down-left","down-right","left-up","left-down"]
+
+/*
+0 = EMPTY
+1 = PLAYER_1
+2 = PLAYER_2
+3 = NEUTRAL_PIECE
+4 = OLD
+*/
