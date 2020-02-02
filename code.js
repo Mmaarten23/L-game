@@ -1,3 +1,7 @@
+global_rotation_count = 0
+global_turn = 1
+global_mode = "place_l"
+
 function generate_board_html(board){
     let board_html = "";
     let temp_row = "";
@@ -7,22 +11,22 @@ function generate_board_html(board){
       let row_html = "<tr>";
       for(let j = 0; j < board[i].length; j++){
         if (board[i][j] == 0){
-          row_html += `<td>  </td>`;
+          row_html += `<td onclick="on_click(this)">  </td>`;
         }
         else if (board[i][j] == 1) {
-          row_html += `<td> 1 </td>`;
+          row_html += `<td onclick="on_click(this)"> 1 </td>`;
         }
         else if (board[i][j] == 2) {
-          row_html += `<td> 2 </td>`;
+          row_html += `<td onclick="on_click(this)"> 2 </td>`;
         }
         else if (board[i][j] == 3) {
-          row_html += `<td> 3 </td>`;
+          row_html += `<td onclick="on_click(this)"> 3 </td>`;
         }
         else if (board[i][j] == 4) {
-          row_html += `<td>  </td>`;
+          row_html += `<td onclick="on_click(this)">  </td>`;
         }
         else if (board[i][j] == 5) {
-          row_html += `<td>  </td>`;
+          row_html += `<td onclick="on_click(this)"> X </td>`;
         }
       }
       row_html += "</tr>";
@@ -56,9 +60,17 @@ window.onload = function(){
 }
 
 
-function check_l_valid(board, startRow, startCol, rotation){
-  positions = decode_rotation(startRow, startCol, rotation)
+function check_l_valid(board, positions){
   old_count = 0
+  //set all current turns to "old"
+  for (let i = 0; i < board.length; i++){
+    for(let j = 0; j < board[i].length; j++){
+      if (board[i][j] == global_turn){
+        board[i][j] = 4
+      }
+    }
+  }
+  // is l valid?
   for (var i = positions.length - 1; i >= 0; i--) {
     // is it within the board boundries
     if (positions[i][0] < 0 || positions[i][0] > 3 || positions[i][1] < 0 || positions[i][1] > 3){
@@ -85,7 +97,6 @@ function check_l_valid(board, startRow, startCol, rotation){
 
 
 function decode_rotation(startRow, startCol, rotation){
-  console.log(rotation)
   if (rotation == "up-left") {
     return [[startRow,startCol],[startRow - 1,startCol],[startRow - 2,startCol],[startRow - 2,startCol - 1]]
   }
@@ -114,6 +125,34 @@ function decode_rotation(startRow, startCol, rotation){
 }
 
 
+function on_click(cell){
+  temp_board = board
+  let col = cell.cellIndex;
+  let row = cell.parentNode.rowIndex;
+  rotations = ["up-left","up-right","right-up","right-down","down-left","down-right","left-up","left-down"]
+  positions = decode_rotation(row, col, rotations[global_rotation_count])
+  if (global_mode == "place_l"){
+    if (check_l_valid(board, positions, global_turn)){
+      temp_board = copy_board(board)
+      for (var i = positions.length - 1; i >= 0; i--){
+        board[positions[i][0]][positions[i][1]] = 5
+      }
+    }
+  }
+  drawBoard(temp_board, "board")
+}
+
+function copy_board(board){
+  new_board = []
+  for (var i = board.length - 1; i >= 0; i--) {
+    temp_row = []
+    for (var j = board[i].length - 1; j >= 0; j--) {
+      temp_row.push(board[i][j])
+    }
+    new_board.push(temp_row)
+  }
+  return new_board
+}
 
 /*NOTES*/
 // rotations = ["up-left","up-right","right-up","right-down","down-left","down-right","left-up","left-down"]
@@ -124,4 +163,5 @@ function decode_rotation(startRow, startCol, rotation){
 2 = PLAYER_2
 3 = NEUTRAL_PIECE
 4 = OLD
+5 = maybe
 */
