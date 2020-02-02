@@ -55,23 +55,24 @@ window.onload = function(){
   main()
 }
 
+
 function check_l_valid(board, startRow, startCol, rotation){
   positions = decode_rotation(startRow, startCol, rotation)
   old_count = 0
-  for (tuple in positions){
+  for (var i = positions.length - 1; i >= 0; i--) {
     // is it within the board boundries
-    if (tuple[0] < 0 || tuple[0] > 3 || tuple[1] < 0 || tuple[1] > 3){
+    if (positions[i][0] < 0 || positions[i][0] > 3 || positions[i][1] < 0 || positions[i][1] > 3){
       return false
     }
     // is it on top of a neutral piece
-    if (board[tuple[0]][tuple[1]] == 3){
+    if (board[positions[i][0]][positions[i][1]] == 3){
       return false
     }
     // is it on a spot accupied by the opponent
-    if (board[tuple[0]][tuple[1]] == 2){
+    if (board[positions[i][0]][positions[i][1]] == 2){
       return false
     }
-    if (board[tuple[0]][tuple[1]] == 4){
+    if (board[positions[i][0]][positions[i][1]] == 4){
       old_count++
     }
   }
@@ -81,6 +82,7 @@ function check_l_valid(board, startRow, startCol, rotation){
   }
   return true
 }
+
 
 function decode_rotation(startRow, startCol, rotation){
   console.log(rotation)
