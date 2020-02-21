@@ -23,7 +23,7 @@ function generate_board_html(board){
           row_html += `<td onclick="on_click(this)"> 3 </td>`;
         }
         else if (board[i][j] == 4) {
-          row_html += `<td onclick="on_click(this)">  </td>`;
+          row_html += `<td onclick="on_click(this)"> OLD </td>`;
         }
         else if (board[i][j] == 5) {
           row_html += `<td onclick="on_click(this)"> X </td>`;
@@ -135,11 +135,11 @@ function on_click(cell){
     if (check_l_valid(board, positions, global_turn)){
       temp_board = copy_board(board)
       for (var i = positions.length - 1; i >= 0; i--){
-        board[positions[i][0]][positions[i][1]] = 5
+        temp_board[positions[i][0]][positions[i][1]] = 5
       }
     }
   }
-  drawBoard(temp_board, "board")
+  drawBoard(temp_board, "dev")
 }
 
 function copy_board(board){
